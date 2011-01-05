@@ -39,12 +39,6 @@ def send(contact_form):
     email.send()
 
 
-def contactsuccess(request):
-    template_vars = {}
-    return render_to_response(settings.CONTACTSUCCESSTEMPLATE,
-                              template_vars,
-                              context_instance=RequestContext(request))
-
 # Create your views here.
 def contact(request):
     template_vars = {}
