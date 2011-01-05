@@ -12,7 +12,7 @@ from django.shortcuts import render_to_response
 from django.template import Context
 from django.template import RequestContext
 from django.template import loader
-from freewanderer.forms import ContactForm
+from django_contact.forms import ContactForm
 from django_contact.models import Contact
 from recaptcha.client import captcha
 
@@ -47,6 +47,7 @@ def contactsuccess(request):
 
 # Create your views here.
 def contact(request):
+    template_vars = {}
     template_vars['CONTACTEXTEND'] = settings.CONTACTEXTEND
     template_vars['CONTACTURL'] = settings.CONTACTURL
     template_vars['RECAPTCHA_PUBLIC_KEY'] = settings.RECAPTCHA_PUBLIC_KEY
@@ -73,6 +74,6 @@ def contact(request):
         contact_form = ContactForm()
         template_vars['contact_form'] = contact_form
 
-    return render_to_response('django_contact/contact.html',
+    return render_to_response('contact.html',
                               template_vars,
                               context_instance=RequestContext(request))
