@@ -15,6 +15,8 @@ from django.template import loader
 from django_contact.forms import ContactForm
 from django_contact.models import Contact
 from recaptcha.client import captcha
+from django.http import Http404  
+
 
 
 def send(contact_form):
@@ -44,6 +46,8 @@ def contact(request):
     template_vars = {}
     template_vars['CONTACTEXTEND'] = settings.CONTACTEXTEND
     template_vars['CONTACTURL'] = settings.CONTACTURL
+    if request.path != settings.CONTACTURL:
+        raise Http404; 
     template_vars['RECAPTCHA_PUBLIC_KEY'] = settings.RECAPTCHA_PUBLIC_KEY
 
     if request.POST:
